@@ -1,5 +1,5 @@
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from products.models import Product
 
 
@@ -11,4 +11,8 @@ def product_list(request: HttpRequest):
 
 
 def product_detail(request: HttpRequest, id):
-    return HttpResponse(f"상품 상세페이지, {id}")
+    product = get_object_or_404(Product, id=id)
+
+    return render(request, "products/product_detail.html", {
+        "product": product
+    })

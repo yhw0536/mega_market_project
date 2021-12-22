@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<section class="section-prod-detail mt-4">
+    <div class="container">
+        <ul>
+            <div>
+                번호 : {{product.id}}
+            </div>
+            <div>
+                등록 : {{product.reg_date}}
+            </div>
+            <div>
+                수정 : {{product.update_date}}
+            </div>
+            <div>
+                이름 : {{product.display_name}}
+            </div>
+            <div>
+                가격 : {{product.sale_price}}
+            </div>
+            <div>
+                마켓 : {{product.market.name}}
+            </div>
+        </ul>
+    </div>
+</section>
+{% endblock %}
