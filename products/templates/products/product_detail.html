@@ -4,7 +4,6 @@
 <section class="section-prod-detail mt-4">
     <div class="container">
         <h1>기본 정보</h1>
-        <ul>
             <div>
                 번호 : {{product.id}}
             </div>
@@ -34,7 +33,19 @@
                 </li>
                 {% endfor %}
             </ul>
-        </ul>
+        <form method = "POST" action="{% url 'qna:create_question' %}">
+            {% csrf_token %}
+
+            <div>
+                <span>내용</span>
+                <textarea name="body" rows="10"></textarea>
+            </div>
+            <div>
+                <span>질문 작성</span>
+                <input type="submit" value="작성">
+            </div>
+
+        </form>
     </div>
 </section>
 {% endblock %}
