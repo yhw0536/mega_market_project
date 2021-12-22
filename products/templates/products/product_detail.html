@@ -33,7 +33,7 @@
                 </li>
                 {% endfor %}
             </ul>
-        <form method = "POST" action="{% url 'qna:create_question' %}">
+        <form method = "POST" action="{% url 'qna:create_question' 'product' product.id %}">
             {% csrf_token %}
             <div>
                 <span>내용</span>
