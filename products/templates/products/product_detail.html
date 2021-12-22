@@ -3,6 +3,7 @@
 {% block content %}
 <section class="section-prod-detail mt-4">
     <div class="container">
+        <h1>기본 정보</h1>
         <ul>
             <div>
                 번호 : {{product.id}}
@@ -22,6 +23,17 @@
             <div>
                 마켓 : {{product.market.name}}
             </div>
+
+            <h1 class="mt-3">옵션</h1>
+            <ul>
+                {% for product_real in product_reals %}
+                <li>
+                    {{product_real.option_1_type}} : {{product_real.option_1_display_name}}
+                    /
+                    {{product_real.option_2_type}} : {{product_real.option_2_display_name}}
+                </li>
+                {% endfor %}
+            </ul>
         </ul>
     </div>
 </section>
