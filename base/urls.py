@@ -19,13 +19,14 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
+    path('products/', include('products.urls')),
     path('admin/', admin.site.urls),
 ]
 
 if settings.DEBUG:
     import debug_toolbar
 
-    #DDT(Django Debug Toolbar) 를 위한 설정
+    # DDT(Django Debug Toolbar) 를 위한 설정
     urlpatterns += [
         path('__debug__/', include(debug_toolbar.urls)),
     ]
