@@ -5,6 +5,22 @@ import django.contrib.auth.validators
 from django.db import migrations, models
 import django.utils.timezone
 
+from accounts.models import User
+
+
+def gen_master(apps, schema_editor):
+    User.objects.create_user(username="admin", password="admin", first_name="관리자", email="", gender="F",
+                             is_superuser=True, is_staff=True)
+
+    for id in range(2, 5):
+        username = f"user{id}"
+        password = f"user{id}"
+        first_name = f"이름{id}"
+        email = f"test{id}@test.com"
+        gender = 'M'
+
+        User.objects.create_user(username=username, password=password, first_name=first_name,
+                                 email=email, gender=gender)
 
 class Migration(migrations.Migration):
 
@@ -43,4 +59,5 @@ class Migration(migrations.Migration):
                 ('objects', django.contrib.auth.models.UserManager()),
             ],
         ),
+        migrations.RunPython(gen_master),
     ]
