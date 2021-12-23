@@ -19,3 +19,13 @@ def product_detail(request: HttpRequest, id):
         "product": product,
         "product_reals": product_reals
     })
+
+def question_create(request: HttpRequest, id):
+    product = get_object_or_404(Product, id=id)
+
+    product_reals = product.product_reals.order_by('option_1_display_name', 'option_2_display_name')
+
+    return render(request, "products/product_detail.html", {
+        "product": product,
+        "product_reals": product_reals
+    })
