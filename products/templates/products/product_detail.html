@@ -46,9 +46,10 @@
         <h1 class="mt-3">질문 리스트</h1>
         <ul>
             {% for question in questions %}
-            <li>
+            <li class="p-3">
                 {{ question.id }}.
                 {{ question.body }}
+                <a href="{% url 'products:question_delete' product.id question.id %}" class="btn btn-sm btn-danger">삭제</a>
             </li>
             {% endfor %}
         </ul>
