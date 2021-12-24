@@ -1,11 +1,22 @@
+.t-mt-\[100px\] {
+  margin-top: 100px;
+}
+
+.t-mt-3 {
+  margin-top: 0.75rem;
+}
+
 @font-face {
-    font-family: 'GmarketSansMedium';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'GmarketSansMedium';
+
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+
+  font-weight: normal;
+
+  font-style: normal;
 }
 
 html > body {
-    font-family: "GmarketSansMedium";
-    text-underline-position: under;
+  font-family: "GmarketSansMedium";
+  text-underline-position: under;
 }
