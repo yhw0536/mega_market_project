@@ -6,11 +6,18 @@
     font-weight: normal;
     font-style: normal;
 }
+
+html > body ul,
+html > body li {
+    margin:0;
+    padding:0;
+    list-style:none;
+}
+
 html > body {
     font-family: "GmarketSansMedium";
     text-underline-position: under;
 }
-
 html > body :is(h1, h2, h3, h4, h5, h6) {
     font-weight:normal;
     margin:0;

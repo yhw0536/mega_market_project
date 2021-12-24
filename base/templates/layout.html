@@ -15,11 +15,11 @@
     <link rel="stylesheet" href="{% static 'common.css' %}">
     <script defer src="{% static 'common.js' %}"></script>
 </head>
-<body class="t-flex t-flex-col t-min-h-screen">
+<body class="t-flex t-flex-col t-min-h-screen t-pt-[56px]">
 
 {% if messages %}
 {% for message in messages %}
-<div class="alert alert-{{ message.tags }}">
+<div class="alert alert-{{ message.tags }} t-my-[0px]">
     {{ message }}
 </div>
 {% endfor %}
