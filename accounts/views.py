@@ -1,10 +1,13 @@
 from django.contrib import messages
-from django.contrib.auth.views import logout_then_login
+from django.contrib.auth.views import logout_then_login, LoginView
 from django.http import HttpRequest
 from django.shortcuts import render, redirect
 from django.contrib.auth import login as auth_login
 
 from .forms import SignupForm
+
+signin = LoginView.as_view(template_name="accounts/signin.html")
+
 
 
 def signout(request: HttpRequest):
