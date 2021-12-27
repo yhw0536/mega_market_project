@@ -34,6 +34,8 @@ def _product_detail(request: HttpRequest, product_id):
     else:
         form = QuestionForm()
 
+        form.errors
+
     product_reals = product.product_reals.order_by('option_1_display_name', 'option_2_display_name')
     questions = product.question.order_by('-id')
 
