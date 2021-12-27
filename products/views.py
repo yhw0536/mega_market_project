@@ -1,7 +1,9 @@
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
 from django.http import HttpRequest
 from django.shortcuts import render, get_object_or_404, redirect
+from django.core import exceptions
 
 from products.models import Product
 from qna.forms import QuestionForm
@@ -14,6 +16,7 @@ def product_list(request: HttpRequest):
         "products": products
     })
 
+
 def _product_detail(request: HttpRequest, product_id):
     product = get_object_or_404(Product, id=product_id)
 
@@ -23,7 +26,7 @@ def _product_detail(request: HttpRequest, product_id):
             question = form.save(commit=False)
             question.content_type = ContentType.objects.get_for_model(product)
             question.object_id = product.id
-            question.user_id = request.user
+            question.user_id = request.user.id
             question.save()
             messages.success(request, "질문이 등록되었습니다.")
 
@@ -49,9 +52,12 @@ def product_detail(request: HttpRequest, product_id):
 def question_create(request:HttpRequest, product_id):
     return _product_detail(request, product_id)
 
-
+@login_required
 def question_delete(request: HttpRequest, product_id, question_id):
     question = get_object_or_404(Question, id=question_id)
+
+    if request.user != question.user:
+        raise exceptions.PermissionDenied()
 
     question.delete()
 
