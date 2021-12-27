@@ -56,6 +56,38 @@ def gen_master(apps, schema_editor):
     ProductReal(product=product, option_1_name="66", option_1_display_name="66", option_2_name="BLUE",
                 option_2_display_name="감성블루").save()
 
+    # 상품 4
+    product = Product(market_id=1, name="원피스3", display_name="인스타여신원피스4", price=30000, sale_price=29000)
+    product.save()
+    ProductReal(product=product, option_1_name="44", option_1_display_name="44", option_2_name="RED",
+                option_2_display_name="감성레드").save()
+    ProductReal(product=product, option_1_name="55", option_1_display_name="55", option_2_name="RED",
+                option_2_display_name="감성레드").save()
+    ProductReal(product=product, option_1_name="66", option_1_display_name="66", option_2_name="RED",
+                option_2_display_name="감성레드").save()
+    ProductReal(product=product, option_1_name="44", option_1_display_name="44", option_2_name="BLUE",
+                option_2_display_name="감성블루").save()
+    ProductReal(product=product, option_1_name="55", option_1_display_name="55", option_2_name="BLUE",
+                option_2_display_name="감성블루").save()
+    ProductReal(product=product, option_1_name="66", option_1_display_name="66", option_2_name="BLUE",
+                option_2_display_name="감성블루").save()
+
+    # 상품 5
+    product = Product(market_id=1, name="원피스3", display_name="인스타여신원피스5", price=30000, sale_price=29000)
+    product.save()
+    ProductReal(product=product, option_1_name="44", option_1_display_name="44", option_2_name="RED",
+                option_2_display_name="감성레드").save()
+    ProductReal(product=product, option_1_name="55", option_1_display_name="55", option_2_name="RED",
+                option_2_display_name="감성레드").save()
+    ProductReal(product=product, option_1_name="66", option_1_display_name="66", option_2_name="RED",
+                option_2_display_name="감성레드").save()
+    ProductReal(product=product, option_1_name="44", option_1_display_name="44", option_2_name="BLUE",
+                option_2_display_name="감성블루").save()
+    ProductReal(product=product, option_1_name="55", option_1_display_name="55", option_2_name="BLUE",
+                option_2_display_name="감성블루").save()
+    ProductReal(product=product, option_1_name="66", option_1_display_name="66", option_2_name="BLUE",
+                option_2_display_name="감성블루").save()
+
     # 마켓 2
     # 상품 1
     product = Product(market_id=2, name="티셔츠1", display_name="인스타여신티셔츠1", price=10000, sale_price=9000)
@@ -105,6 +137,38 @@ def gen_master(apps, schema_editor):
     ProductReal(product=product, option_1_name="66", option_1_display_name="66", option_2_name="BLUE",
                 option_2_display_name="감성블루").save()
 
+    # 상품 4
+    product = Product(market_id=2, name="티셔츠2", display_name="인스타여신티셔츠4", price=30000, sale_price=29000)
+    product.save()
+    ProductReal(product=product, option_1_name="44", option_1_display_name="44", option_2_name="RED",
+                option_2_display_name="감성레드", is_hidden=True).save()
+    ProductReal(product=product, option_1_name="55", option_1_display_name="55", option_2_name="RED",
+                option_2_display_name="감성레드").save()
+    ProductReal(product=product, option_1_name="66", option_1_display_name="66", option_2_name="RED",
+                option_2_display_name="감성레드").save()
+    ProductReal(product=product, option_1_name="44", option_1_display_name="44", option_2_name="BLUE",
+                option_2_display_name="감성블루").save()
+    ProductReal(product=product, option_1_name="55", option_1_display_name="55", option_2_name="BLUE",
+                option_2_display_name="감성블루").save()
+    ProductReal(product=product, option_1_name="66", option_1_display_name="66", option_2_name="BLUE",
+                option_2_display_name="감성블루").save()
+
+    # 상품 5
+    product = Product(market_id=2, name="티셔츠2", display_name="인스타여신티셔츠5", price=30000, sale_price=29000)
+    product.save()
+    ProductReal(product=product, option_1_name="44", option_1_display_name="44", option_2_name="RED",
+                option_2_display_name="감성레드", is_hidden=True).save()
+    ProductReal(product=product, option_1_name="55", option_1_display_name="55", option_2_name="RED",
+                option_2_display_name="감성레드").save()
+    ProductReal(product=product, option_1_name="66", option_1_display_name="66", option_2_name="RED",
+                option_2_display_name="감성레드").save()
+    ProductReal(product=product, option_1_name="44", option_1_display_name="44", option_2_name="BLUE",
+                option_2_display_name="감성블루").save()
+    ProductReal(product=product, option_1_name="55", option_1_display_name="55", option_2_name="BLUE",
+                option_2_display_name="감성블루").save()
+    ProductReal(product=product, option_1_name="66", option_1_display_name="66", option_2_name="BLUE",
+                option_2_display_name="감성블루").save()
+
     # 마켓 3
     # 상품 1
     product = Product(market_id=3, name="바지1", display_name="신사바지1", price=10000, sale_price=9000, is_hidden=True)
@@ -140,6 +204,38 @@ def gen_master(apps, schema_editor):
 
     # 상품 3
     product = Product(market_id=3, name="바지3", display_name="신사바지3", price=10000, sale_price=9000)
+    product.save()
+    ProductReal(product=product, option_1_name="24", option_1_display_name="24", option_2_name="RED",
+                option_2_display_name="감성레드", is_sold_out=True).save()
+    ProductReal(product=product, option_1_name="26", option_1_display_name="26", option_2_name="RED",
+                option_2_display_name="감성레드").save()
+    ProductReal(product=product, option_1_name="28", option_1_display_name="28", option_2_name="RED",
+                option_2_display_name="감성레드").save()
+    ProductReal(product=product, option_1_name="24", option_1_display_name="24", option_2_name="BLUE",
+                option_2_display_name="감성블루").save()
+    ProductReal(product=product, option_1_name="26", option_1_display_name="26", option_2_name="BLUE",
+                option_2_display_name="감성블루").save()
+    ProductReal(product=product, option_1_name="28", option_1_display_name="28", option_2_name="BLUE",
+                option_2_display_name="감성블루").save()
+
+    # 상품 4
+    product = Product(market_id=3, name="바지3", display_name="신사바지4", price=10000, sale_price=9000)
+    product.save()
+    ProductReal(product=product, option_1_name="24", option_1_display_name="24", option_2_name="RED",
+                option_2_display_name="감성레드", is_sold_out=True).save()
+    ProductReal(product=product, option_1_name="26", option_1_display_name="26", option_2_name="RED",
+                option_2_display_name="감성레드").save()
+    ProductReal(product=product, option_1_name="28", option_1_display_name="28", option_2_name="RED",
+                option_2_display_name="감성레드").save()
+    ProductReal(product=product, option_1_name="24", option_1_display_name="24", option_2_name="BLUE",
+                option_2_display_name="감성블루").save()
+    ProductReal(product=product, option_1_name="26", option_1_display_name="26", option_2_name="BLUE",
+                option_2_display_name="감성블루").save()
+    ProductReal(product=product, option_1_name="28", option_1_display_name="28", option_2_name="BLUE",
+                option_2_display_name="감성블루").save()
+
+    # 상품 5
+    product = Product(market_id=3, name="바지3", display_name="신사바지5", price=10000, sale_price=9000)
     product.save()
     ProductReal(product=product, option_1_name="24", option_1_display_name="24", option_2_name="RED",
                 option_2_display_name="감성레드", is_sold_out=True).save()

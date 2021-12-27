@@ -4,6 +4,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.http import HttpRequest
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core import exceptions
+from django.core.paginator import Paginator
 
 from products.models import Product
 from qna.forms import QuestionForm
@@ -12,8 +13,12 @@ from qna.models import Question
 
 def product_list(request: HttpRequest):
     products = Product.objects.order_by('-id')
+    page = int(request.GET.get('page', 1))
+    paginator = Paginator(products, 12)
+    p_list = paginator.get_page(page)
+
     return render(request, "products/product_list.html", {
-        "products": products
+        "products": p_list
     })
 
 
