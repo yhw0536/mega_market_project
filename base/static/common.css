@@ -20,6 +20,10 @@
   margin-bottom: 0px;
 }
 
+.t-mt-\[30px\] {
+  margin-top: 30px;
+}
+
 .t-mt-3 {
   margin-top: 0.75rem;
 }
@@ -28,8 +32,8 @@
   margin-top: 0.5rem;
 }
 
-.t-mt-\[30px\] {
-  margin-top: 30px;
+.t-mt-5 {
+  margin-top: 1.25rem;
 }
 
 .t-block {

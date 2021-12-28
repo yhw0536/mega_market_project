@@ -71,9 +71,9 @@
 
                 {% if question_form.errors %}
                 <script>
-                    let $form = $('form').last();
-                    $(function() {
-                        $(window).scrollTop($form.offset().top, 0);
+                    let $lastForm = $('form').last();
+                    $(window).on('load', function() {
+                        $(window).scrollTop($lastForm.offset().top);
                     });
 
 
