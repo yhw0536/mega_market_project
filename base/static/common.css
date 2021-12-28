@@ -15,6 +15,10 @@
   position: relative;
 }
 
+.t--z-50 {
+  z-index: -50;
+}
+
 .t-my-\[0px\] {
   margin-top: 0px;
   margin-bottom: 0px;
@@ -84,8 +88,16 @@
   gap: 20px;
 }
 
+.t-overflow-hidden {
+  overflow: hidden;
+}
+
 .t-whitespace-nowrap {
   white-space: nowrap;
+}
+
+.t-rounded {
+  border-radius: 0.25rem;
 }
 
 .t-py-\[20px\] {
@@ -109,8 +121,52 @@
   font-size: 1.5rem;
 }
 
+.t-text-\[1\.2rem\] {
+  font-size: 1.2rem;
+}
+
 .t-font-bold {
   font-weight: 700;
+}
+
+.t-italic {
+  font-style: italic;
+}
+
+.t-text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+
+.t-text-gray-200 {
+  --tw-text-opacity: 1;
+  color: rgb(229 231 235 / var(--tw-text-opacity));
+}
+
+.t-text-gray-600 {
+  --tw-text-opacity: 1;
+  color: rgb(75 85 99 / var(--tw-text-opacity));
+}
+
+.t-text-gray-400 {
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity));
+}
+
+.t-underline {
+  -webkit-text-decoration-line: underline;
+          text-decoration-line: underline;
+}
+
+.t-no-underline {
+  -webkit-text-decoration-line: none;
+          text-decoration-line: none;
+}
+
+.t-transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
 }
 
 @font-face {
@@ -258,12 +314,43 @@ html > body :is(h1, h2, h3, h4, h5, h6) {
   content: var(--tw-content);
 }
 
+.hover\:t-text-black:hover {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+
 .hover\:before\:t-bg-\[\#00000055\]:hover::before {
   content: var(--tw-content);
   background-color: #00000055;
 }
 
 .hover\:after\:t-block:hover::after {
+  content: var(--tw-content);
+  display: block;
+}
+
+.t-group:hover .group-hover\:t-scale-110 {
+  --tw-scale-x: 1.1;
+  --tw-scale-y: 1.1;
+  transform: var(--tw-transform);
+}
+
+.t-group:hover .group-hover\:t-text-blue-400 {
+  --tw-text-opacity: 1;
+  color: rgb(96 165 250 / var(--tw-text-opacity));
+}
+
+.t-group:hover .group-hover\:t-underline {
+  -webkit-text-decoration-line: underline;
+          text-decoration-line: underline;
+}
+
+.t-group:hover .group-hover\:before\:t-bg-\[\#00000055\]::before {
+  content: var(--tw-content);
+  background-color: #00000055;
+}
+
+.t-group:hover .group-hover\:after\:t-block::after {
   content: var(--tw-content);
   display: block;
 }
