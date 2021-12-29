@@ -64,6 +64,10 @@
   max-width: 300px;
 }
 
+.t-max-w-screen-md {
+  max-width: 768px;
+}
+
 .t-flex-1 {
   flex: 1 1 0%;
 }
@@ -117,10 +121,6 @@
   font-size: 20px;
 }
 
-.t-text-\[1\.5rem\] {
-  font-size: 1.5rem;
-}
-
 .t-text-\[1\.2rem\] {
   font-size: 1.2rem;
 }
@@ -138,24 +138,9 @@
   color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
-.t-text-gray-200 {
-  --tw-text-opacity: 1;
-  color: rgb(229 231 235 / var(--tw-text-opacity));
-}
-
-.t-text-gray-600 {
-  --tw-text-opacity: 1;
-  color: rgb(75 85 99 / var(--tw-text-opacity));
-}
-
 .t-text-gray-400 {
   --tw-text-opacity: 1;
   color: rgb(156 163 175 / var(--tw-text-opacity));
-}
-
-.t-underline {
-  -webkit-text-decoration-line: underline;
-          text-decoration-line: underline;
 }
 
 .t-no-underline {
@@ -312,21 +297,6 @@ html > body :is(h1, h2, h3, h4, h5, h6) {
 .after\:t-content-\[attr\(data-before\)\]::after {
   --tw-content: attr(data-before);
   content: var(--tw-content);
-}
-
-.hover\:t-text-black:hover {
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity));
-}
-
-.hover\:before\:t-bg-\[\#00000055\]:hover::before {
-  content: var(--tw-content);
-  background-color: #00000055;
-}
-
-.hover\:after\:t-block:hover::after {
-  content: var(--tw-content);
-  display: block;
 }
 
 .t-group:hover .group-hover\:t-scale-110 {
