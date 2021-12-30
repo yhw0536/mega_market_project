@@ -24,11 +24,15 @@
                 </li>
                 <li class="list-group-item">
                     <span class="t-w-16 t-inline-block">상품명</span>
-                    <span class="badge bg-primary">{{product.display_name}}</span>
+                    <span class="t-font-bold">{{product.display_name}}</span>
                 </li>
                 <li class="list-group-item">
                     <span class="t-w-16 t-inline-block">가격</span>
-                    <span class="badge bg-primary">{{product.sale_price|intcomma}}원</span>
+                    <span class="t-font-bold">{{product.sale_price|intcomma}}원</span>
+                </li>
+                <li class="list-group-item">
+                    <span class="t-w-16 t-inline-block">색상</span>
+                    <span class="t-font-bold">{{product.colors|safe}}</span>
                 </li>
             </ul>
 
