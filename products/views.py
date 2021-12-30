@@ -12,7 +12,13 @@ from qna.models import Question
 
 
 def product_list(request: HttpRequest):
-    products = Product.objects.order_by('-id')
+    search_keyword = request.GET.get('search_keyword', '')
+
+    if not search_keyword:
+        products = Product.objects.order_by('-id')
+    else:
+        products = Product.objects.filter(display_name__icontains=search_keyword).order_by('-id')
+
     page = int(request.GET.get('page', 1))
     paginator = Paginator(products, 12)
     p_list = paginator.get_page(page)
