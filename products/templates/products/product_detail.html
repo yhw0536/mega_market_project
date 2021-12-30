@@ -113,7 +113,7 @@
                         질문리스트
                     </div>
 
-                    {% if question %}
+                    {% if questions %}
                     <ul class="list-group list-group-flush">
                         {% for question in questions %}
                         <li class="list-group-item">
@@ -131,7 +131,7 @@
                     </ul>
                     {% endif %}
 
-                    {% if not question %}
+                    {% if not questions %}
                     <div class="card-body">
                         <div class="t-text-gray-400">
                             질문이 없습니다.
