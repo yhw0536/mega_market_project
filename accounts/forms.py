@@ -1,7 +1,18 @@
 from django.contrib.auth.forms import UserCreationForm
-from django.forms import forms
-
+from django.forms import forms, ModelForm
+from django import forms
 from accounts.models import User
+
+
+class FindUsernameForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['email'].required = True
+        self.fields['first_name'].required = True
+
+    class Meta:
+        model = User
+        fields = ['first_name', 'email']
 
 
 class SignupForm(UserCreationForm):
