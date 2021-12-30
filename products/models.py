@@ -25,7 +25,25 @@ class Product(models.Model):
     question = GenericRelation(Question, related_query_name="question")
 
     def thumb_img_url(self):
-        return f"https://picsum.photos/id/{self.id}/300/300"
+        img_names = {
+            1: '구두',
+            2: '니트',
+            3: '롱스커트',
+            4: '숏스커트',
+            5: '청바지',
+            6: '자켓',
+            7: '티셔츠',
+            8: '코트',
+            9: '백',
+            10: '블라우스',
+            11: '구두',
+            12: '구두',
+            13: '구두',
+        }
+
+        img_names = img_names[self.category_id]
+
+        return f"https://raw.githubusercontent.com/yhw0536/mbly-img/master/{img_names}.jpg"
 
 
 class ProductReal(models.Model):

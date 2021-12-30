@@ -15,8 +15,8 @@ def gen_product(market_id: int, name: string, display_name: string, price: int, 
         '롱스커트': 3,
         '숏스커트': 4,
         '청바지': 5,
-        '청자켓': 6,
-        '청치마': 7,
+        '자켓': 6,
+        '티셔츠': 7,
         '코트': 8,
         '백': 9,
         '블라우스': 10,
@@ -101,9 +101,9 @@ def gen_master(apps, schema_editor):
     review_count = 140
     review_point = 3
 
-    gen_product(2, '청자켓', '인스타 셀럽 청자켓', price, ('34', '36'),
+    gen_product(2, '자켓', '인스타 셀럽 자켓', price, ('34', '36'),
                 False, False, hit_count, review_count, review_point)
-    gen_product(2, '청자켓', '아이돌 청자켓', price + 2000,
+    gen_product(2, '자켓', '아이돌 자켓', price + 2000,
                 ('34', '36'),
                 False, False, hit_count + 500, review_count + 50, review_point + 1)
 
@@ -112,9 +112,9 @@ def gen_master(apps, schema_editor):
     review_count = 50
     review_point = 2
 
-    gen_product(2, '청치마', '인스타 셀럽 청치마', price, ('FREE'),
+    gen_product(2, '티셔츠', '인스타 셀럽 티셔츠', price, ('FREE'),
                 False, False, hit_count, review_count, review_point)
-    gen_product(2, '청치마', '아이돌 청치마', price + 2000,
+    gen_product(2, '티셔츠', '아이돌 티셔츠', price + 2000,
                 ('FREE'),
                 False, False, hit_count + 500, review_count + 50, review_point + 1)
 

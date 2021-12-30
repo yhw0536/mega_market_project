@@ -104,6 +104,11 @@
   border-radius: 0.25rem;
 }
 
+.t-object-cover {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
 .t-py-\[20px\] {
   padding-top: 20px;
   padding-bottom: 20px;
