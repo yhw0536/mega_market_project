@@ -31,9 +31,9 @@
 
 <header>
     <!-- Fixed navbar -->
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{% url 'main' %}">멋블리</a>
+            <a class="navbar-brand" href="{% url 'main' %}"><i class="fab fa-pied-piper-hat"></i> 멋블리</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                     aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -41,24 +41,21 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{% url 'main' %}">홈</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'products:list' %}">상품리스트</a>
+                        <a class="nav-link" href="{% url 'products:list' %}"><i class="fas fa-tshirt"></i> 상품리스트</a>
                     </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'accounts:signout' %}">로그아웃</a>
+                        <a class="nav-link" href="{% url 'accounts:signout' %}"><i class="fas fa-sign-out-alt"></i> 로그아웃</a>
                     </li>
                     {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'accounts:signin' %}?next={{request.path}}">로그인</a>
+                        <a class="nav-link" href="{% url 'accounts:signin' %}?next={{request.path}}"><i class="fas fa-sign-in-alt"></i> 로그인</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'accounts:signup' %}">회원가입</a>
+                        <a class="nav-link" href="{% url 'accounts:signup' %}"><i class="fas fa-user-plus"></i> 회원가입</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'accounts:find_username' %}">아이디 찾기</a>
+                        <a class="nav-link" href="{% url 'accounts:find_username' %}"><i class="fas fa-users"></i> 아이디 찾기</a>
                     </li>
                     {% endif %}
                 </ul>
