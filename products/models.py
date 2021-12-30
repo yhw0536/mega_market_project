@@ -45,6 +45,28 @@ class Product(models.Model):
 
         return f"https://raw.githubusercontent.com/yhw0536/mbly-img/master/{img_names}.jpg"
 
+    def colors(self):
+        colors = []
+        product_reals = self.product_reals.all()
+        for product_real in product_reals:
+            colors.append(product_real.option_2_name)
+
+        html = ''
+
+        for color in set(colors):
+            if color == '레드':
+                rgb_color = 'red'
+            elif color == '그린':
+                rgb_color = 'green'
+            elif color == '블루':
+                rgb_color = 'blue'
+            elif color == '핑크':
+                rgb_color = 'pink'
+            elif color == '와인':
+                rgb_color = '#722F37'
+            html += f"""<span style="width:10px; height:10px; display:inline-block; border-radius:50%; margin:0 3px; background-color:{rgb_color};"></span>"""
+
+        return html
 
 class ProductReal(models.Model):
     reg_date = models.DateTimeField('등록날짜', auto_now_add=True)

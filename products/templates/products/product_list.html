@@ -25,6 +25,10 @@
                     <i class="fas fa-won-sign "></i>
                     <span>{{ product.sale_price|intcomma }}</span>
                 </a>
+                <a class="t-text-center t-mt-2 t-no-underline t-text-gray-400 group-hover:t-text-blue-400"
+                   href="{% url 'products:detail' product.id %}">
+                    <span>{{ product.colors|safe }}</span>
+                </a>
             </li>
             {% endfor %}
 
