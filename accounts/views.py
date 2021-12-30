@@ -5,8 +5,11 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login as auth_login
 
 from .forms import SignupForm
+from .decorators import logout_required
 
-signin = LoginView.as_view(template_name="accounts/signin.html")
+@logout_required
+def signin(request: HttpRequest):
+    return LoginView.as_view(template_name="accounts/signin.html")
 
 
 
@@ -14,7 +17,7 @@ def signout(request: HttpRequest):
     messages.success(request, "로그아웃 되었습니다.")
     return logout_then_login(request)
 
-
+@logout_required
 def signup(request):
     if request.method == 'POST':
         form = SignupForm(request.POST)

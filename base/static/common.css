@@ -60,12 +60,12 @@
   width: 100%;
 }
 
-.t-max-w-\[300px\] {
-  max-width: 300px;
-}
-
 .t-max-w-screen-md {
   max-width: 768px;
+}
+
+.t-max-w-\[300px\] {
+  max-width: 300px;
 }
 
 .t-flex-1 {
