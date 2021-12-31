@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django_bootstrap5',
     'debug_toolbar',
     'django_pydenticon',
-    'easy_thumbnails',
     # 로컬
     'accounts.apps.AccountsConfig',
     'cart.apps.CartConfig',
