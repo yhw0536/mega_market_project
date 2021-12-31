@@ -43,6 +43,8 @@ class Product(models.Model):
 
         img_names = img_names[self.category_id]
 
+        img_names += '2' if self.id % 2 == 0 else ''
+
         return f"https://raw.githubusercontent.com/yhw0536/mbly-img/master/{img_names}.jpg"
 
     def colors(self):
