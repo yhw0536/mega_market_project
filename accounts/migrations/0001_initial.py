@@ -8,19 +8,7 @@ import django.utils.timezone
 from accounts.models import User
 
 
-def gen_master(apps, schema_editor):
-    User.objects.create_user(username="admin", password="admin", first_name="관리자", email="", gender="F",
-                             is_superuser=True, is_staff=True)
 
-    for id in range(2, 5):
-        username = f"user{id}"
-        password = f"user{id}"
-        first_name = f"이름{id}"
-        email = f"test{id}@test.com"
-        gender = 'M'
-
-        User.objects.create_user(username=username, password=password, first_name=first_name,
-                                 email=email, gender=gender)
 
 class Migration(migrations.Migration):
 
@@ -46,7 +34,7 @@ class Migration(migrations.Migration):
                 ('is_active', models.BooleanField(default=True, help_text='Designates whether this user should be treated as active. Unselect this instead of deleting accounts.', verbose_name='active')),
                 ('date_joined', models.DateTimeField(default=django.utils.timezone.now, verbose_name='date joined')),
                 ('gender', models.CharField(blank=True, choices=[('M', '남성'), ('F', '여성')], max_length=1, verbose_name='성별')),
-                ('avarar', models.ImageField(blank=True, help_text='100px * 100px 크기의 gif/png/jpg 이미지를 업로드해주세요.', upload_to='accounts/avatar/%Y/%M/%d', verbose_name='아바타')),
+                ('avatar', models.ImageField(blank=True, help_text='100px * 100px 크기의 gif/png/jpg 이미지를 업로드해주세요.', upload_to='accounts/avatar/%Y/%M/%d', verbose_name='아바타')),
                 ('groups', models.ManyToManyField(blank=True, help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.', related_name='user_set', related_query_name='user', to='auth.Group', verbose_name='groups')),
                 ('user_permissions', models.ManyToManyField(blank=True, help_text='Specific permissions for this user.', related_name='user_set', related_query_name='user', to='auth.Permission', verbose_name='user permissions')),
             ],
@@ -59,5 +47,4 @@ class Migration(migrations.Migration):
                 ('objects', django.contrib.auth.models.UserManager()),
             ],
         ),
-        migrations.RunPython(gen_master),
     ]

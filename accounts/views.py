@@ -1,3 +1,5 @@
+import os
+
 from django.contrib import messages
 from django.contrib.auth.views import logout_then_login, LoginView
 from django.contrib.sites import requests
@@ -30,6 +32,7 @@ class MyLoginView(SuccessMessageMixin, LoginView):
         initial['username'] = self.request.GET.get('username', None)
 
         return initial
+
 
 @logout_required
 def signin(request: HttpRequest):
@@ -83,27 +86,28 @@ def find_username(request: HttpRequest):
 
 
 def kakao_login(request: HttpRequest):
-    client_id = "5fca6764f41dbc611bab791c91ae26fc"
-    REDIRECT_URI = "http://localhost:8000/accounts/signin/kakao/callback"
+    REST_API_KEY = os.environ.get("KAKAO_APP__REST_API_KEY")
+    REDIRECT_URI = os.environ.get("KAKAO_APP__LOGIN__REDIRECT_URI")
     return redirect(
-        f"https://kauth.kakao.com/oauth/authorize?client_id={client_id}&redirect_uri={REDIRECT_URI}&response_type=code"
+        f"https://kauth.kakao.com/oauth/authorize?client_id={REST_API_KEY}&redirect_uri={REDIRECT_URI}&response_type=code"
     )
+
 
 def kakao_login_callback(request):
     # (1)
     code = request.GET.get("code")
-    client_id = "5fca6764f41dbc611bab791c91ae26fc"
-    REDIRECT_URI = "http://localhost:8000/accounts/signin/kakao/callback"
+    REST_API_KEY = os.environ.get("KAKAO_APP__REST_API_KEY")
+    REDIRECT_URI = os.environ.get("KAKAO_APP__LOGIN__REDIRECT_URI")
 
     token_request = requests.get(
-        f"https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id={client_id}&redirect_uri={REDIRECT_URI}&code={code}"
+        f"https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id={REST_API_KEY}&redirect_uri={REDIRECT_URI}&code={code}"
     )
 
     token_json = token_request.json()
 
     error = token_json.get("error", None)
     if error is not None:
-        raise KakaoException()
+        raise Exception("카카오 로그인 에러")
 
     access_token = token_json.get("access_token")
 
@@ -115,4 +119,8 @@ def kakao_login_callback(request):
 
     id = profile_json.get("id")
 
-    return HttpResponse(id)
+    User.login_with_kakao(request, id)
+
+    messages.success(request, "카카오 계정으로 로그인 되었습니다.")
+
+    return redirect("main")
