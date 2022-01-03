@@ -47,6 +47,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'accounts:signout' %}"><i class="fas fa-sign-out-alt"></i> 로그아웃</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                        [{{ user.first_name }}] 's Page
+                        </a>
+                    </li>
                     {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'accounts:signin' %}?next={{request.path}}"><i class="fas fa-sign-in-alt"></i> 로그인</a>
@@ -60,7 +65,7 @@
                     {% endif %}
                 </ul>
                 <form class="d-flex" action="{% url 'products:list' %}">
-                    <input class="form-control me-2" type="search" name="search_keyword" placeholder="상품명을 입력해주세요." aria-label="Search" value="{{ request.GET.search_keyword }}">
+                    <input class="form-control me-2" type="search" name="search_keyword" placeholder="상품명을 입력해주세요." aria-label="Search" value="{{request.GET.search_keyword}}">
                     <button class="btn btn-outline-success t-whitespace-nowrap" type="submit">검색</button>
                 </form>
             </div>
