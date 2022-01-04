@@ -5,6 +5,9 @@ from django.db import models
 from markets.models import Market
 from qna.models import Question
 
+class ProductCategory(models.Model):
+    name = models.CharField('이름', max_length=50)
+
 
 class Product(models.Model):
     reg_date = models.DateTimeField('등록날짜', auto_now_add=True)
@@ -18,30 +21,14 @@ class Product(models.Model):
     sale_price = models.PositiveIntegerField('실제판매가')
     is_hidden = models.BooleanField('노출여부', default=False)
     is_sold_out = models.BooleanField('품절여부', default=False)
-    category_id = models.PositiveIntegerField('카테고리번호(추후설계)', default=0)
+    category = models.ForeignKey(ProductCategory, on_delete=models.DO_NOTHING)
     hit_count = models.PositiveIntegerField('조회수', default=0)
     review_count = models.PositiveIntegerField('리뷰수', default=0)
     review_point = models.PositiveIntegerField('리뷰평점', default=0)
     question = GenericRelation(Question, related_query_name="question")
 
     def thumb_img_url(self):
-        img_names = {
-            1: '구두',
-            2: '니트',
-            3: '롱스커트',
-            4: '숏스커트',
-            5: '청바지',
-            6: '자켓',
-            7: '티셔츠',
-            8: '코트',
-            9: '백',
-            10: '블라우스',
-            11: '구두',
-            12: '구두',
-            13: '구두',
-        }
-
-        img_names = img_names[self.category_id]
+        img_names = self.category.name
 
         img_names += '2' if self.id % 2 == 0 else ''
 
@@ -89,5 +76,3 @@ class ProductReal(models.Model):
     stock_quantity = models.PositiveIntegerField('재고개수', default=0)  # 품절일때 유용함
 
 
-class ProductCategory(models.Model):
-    name = models.CharField('이름', max_length=50)

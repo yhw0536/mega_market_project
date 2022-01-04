@@ -4,25 +4,25 @@ import string
 from django.db import migrations, models
 import django.db.models.deletion
 
-from products.models import Product, ProductReal
+from products.models import Product, ProductReal, ProductCategory
+
+
+def gen_master_product_category(apps, schema_editor):
+    ProductCategory(name='구두').save()
+    ProductCategory(name='니트').save()
+    ProductCategory(name='롱스커트').save()
+    ProductCategory(name='숏스커트').save()
+    ProductCategory(name='청바지').save()
+    ProductCategory(name='자켓').save()
+    ProductCategory(name='티셔츠').save()
+    ProductCategory(name='코트').save()
+    ProductCategory(name='백').save()
+    ProductCategory(name='블라우스').save()
 
 
 def gen_product(market_id: int, name: string, display_name: string, price: int, opt_1_names: (string), is_hidden: bool,
                 is_sold_out: bool, hit_count: int, review_count: int, review_point: int):
-    category_ids = {
-        '구두': 1,
-        '니트': 2,
-        '롱스커트': 3,
-        '숏스커트': 4,
-        '청바지': 5,
-        '자켓': 6,
-        '티셔츠': 7,
-        '코트': 8,
-        '백': 9,
-        '블라우스': 10,
-    }
-
-    category_id = category_ids[name]
+    category_id = ProductCategory.objects.filter(name=name).first().id
 
     opt_2_names = ('레드', '와인', '그린', '핑크',)
     opt_2_display_names = ('감성레드', '감성와인', '감성그린', '감성핑크',)
@@ -40,7 +40,7 @@ def gen_product(market_id: int, name: string, display_name: string, price: int, 
                         option_2_name=opt_2_name, option_2_display_name=opt_2_display_name).save()
 
 
-def gen_master(apps, schema_editor):
+def gen_master_product(apps, schema_editor):
     price = 10000
     hit_count = 1000
     review_count = 100
@@ -153,7 +153,6 @@ def gen_master(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -175,11 +174,16 @@ class Migration(migrations.Migration):
                 ('sale_price', models.PositiveIntegerField(verbose_name='실제판매가')),
                 ('is_hidden', models.BooleanField(default=False, verbose_name='노출여부')),
                 ('is_sold_out', models.BooleanField(default=False, verbose_name='품절여부')),
-                ('category_id', models.PositiveIntegerField(default=0, verbose_name='카테고리번호(추후설계)')),
                 ('hit_count', models.PositiveIntegerField(default=0, verbose_name='조회수')),
                 ('review_count', models.PositiveIntegerField(default=0, verbose_name='리뷰수')),
                 ('review_point', models.PositiveIntegerField(default=0, verbose_name='리뷰평점')),
-                ('market', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='markets.market')),
+            ],
+        ),
+        migrations.CreateModel(
+            name='ProductCategory',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('name', models.CharField(max_length=50, verbose_name='이름')),
             ],
         ),
         migrations.CreateModel(
@@ -196,13 +200,29 @@ class Migration(migrations.Migration):
                 ('option_2_display_name', models.CharField(max_length=50, verbose_name='옵션2 이름(고객용)')),
                 ('option_3_type', models.CharField(blank=True, default='', max_length=10, verbose_name='옵션3 타입')),
                 ('option_3_name', models.CharField(blank=True, default='', max_length=50, verbose_name='옵션3 이름(내부용)')),
-                ('option_3_display_name', models.CharField(blank=True, default='', max_length=50, verbose_name='옵션3 이름(고객용)')),
+                ('option_3_display_name',
+                 models.CharField(blank=True, default='', max_length=50, verbose_name='옵션3 이름(고객용)')),
                 ('is_sold_out', models.BooleanField(default=False, verbose_name='품절여부')),
                 ('is_hidden', models.BooleanField(default=False, verbose_name='노출여부')),
                 ('add_price', models.IntegerField(default=0, verbose_name='추가가격')),
                 ('stock_quantity', models.PositiveIntegerField(default=0, verbose_name='재고개수')),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='product_reals', to='products.product')),
+                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='product_reals',
+                                              to='products.product')),
             ],
         ),
-        migrations.RunPython(gen_master),
+
+        migrations.AddField(
+            model_name='product',
+            name='category',
+            field=models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='products.productcategory'),
+
+        ),
+        migrations.AddField(
+            model_name='product',
+            name='market',
+            field=models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='markets.market'),
+
+        ),
+        migrations.RunPython(gen_master_product_category),
+        migrations.RunPython(gen_master_product),
     ]
