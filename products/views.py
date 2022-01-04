@@ -20,7 +20,7 @@ def product_list(request: HttpRequest):
         products = Product.objects.filter(display_name__icontains=search_keyword).order_by('-id')
 
     page = int(request.GET.get('page', 1))
-    paginator = Paginator(products, 12)
+    paginator = Paginator(products, 4)
     p_list = paginator.get_page(page)
 
     return render(request, "products/product_list.html", {

@@ -40,7 +40,7 @@
                     <ul class="pagination justify-content-center">
                         {% if products.has_previous %}
                         <li class="page-item">
-                            <a class="page-link" href="?page={{products.previous_page_number }}">이전으로</a>
+                            <a class="page-link" href="?page={{products.previous_page_number }}&search_keyword={{ request.GET.search_keyword }}">이전으로</a>
                         </li>
                         {% else %}
                         <li class="page-item disabled">
@@ -52,11 +52,11 @@
                             {% if page_number >= products.number|add:-5 and page_number <= products.number|add:5 %}
                             {% if page_number == products.number %}
                         <li class="page-item active" aria-current="page">
-                            <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+                            <a class="page-link" href="?page={{ page_number }}&search_keyword={{ request.GET.search_keyword }}">{{ page_number }}</a>
                         </li>
                         {% else %}
                         <li class="page-item">
-                            <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+                            <a class="page-link" href="?page={{ page_number }}&search_keyword={{ request.GET.search_keyword }}">{{ page_number }}</a>
                         </li>
                         {% endif %}
                         {% endif %}
@@ -64,7 +64,7 @@
                         </li>
                         {% if products.has_next %}
                         <li class="page-item">
-                            <a class="page-link" href="?page={{products.next_page_number }}">다음으로</a>
+                            <a class="page-link" href="?page={{products.next_page_number }}&search_keyword={{ request.GET.search_keyword }}">다음으로</a>
                         </li>
                         {% else %}
                         <li class="page-item disabled">
