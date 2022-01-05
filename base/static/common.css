@@ -117,6 +117,14 @@
      object-fit: cover;
 }
 
+.t-p-\[5px\] {
+  padding: 5px;
+}
+
+.t-p-\[10px\] {
+  padding: 10px;
+}
+
 .t-py-\[20px\] {
   padding-top: 20px;
   padding-bottom: 20px;
