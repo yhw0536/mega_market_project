@@ -1,15 +1,13 @@
 {% extends "layout.html" %}
 {% load humanize %}
 {% load django_bootstrap5 %}
-
-{% block content %}
+{%block content %}
 <section class="section-prod-detail">
     <div class="container">
         <div class="card">
             <div class="card-header">
                 상품상세정보
             </div>
-
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">
                     <img class="t-w-full t-max-w-[300px] t-rounded" src="{{product.thumb_img_url}}" alt="">
@@ -28,11 +26,11 @@
                 </li>
                 <li class="list-group-item">
                     <span class="t-w-16 t-inline-block">가격</span>
-                    <span class="t-font-bold">{{product.sale_price|intcomma}}원</span>
+                    <span class="t-font-bold">{{product.sale_price|intcomma}}</span>원
                 </li>
                 <li class="list-group-item">
                     <span class="t-w-16 t-inline-block">색상</span>
-                    <span class="t-font-bold">{{product.colors|safe}}</span>
+                    {{product.colors|safe}}
                 </li>
             </ul>
 
@@ -48,6 +46,7 @@
                     {% csrf_token %}
                     <div class="mb-3">
                         <label class="form-label" for="product_real_id">옵션</label>
+
                         <select class="form-control" id="product_real_id" name="product_real_id">
                             <option disabled selected>옵션을 선택해주세요.</option>
                             {% for product_real in product_reals %}
@@ -57,121 +56,132 @@
                             {% endfor %}
                         </select>
                     </div>
+
                     <div class="mb-3">
                         <label class="form-label" for="quantity">수량</label>
-                        <input name="quantity" id="quantity" placeholder="개수" min="1" max="100" value="1"
-                               class="form-control" type="number">
+
+                        <input name="quantity" id="quantity" placeholder="수량" min="1" max="100" type="number" value="1"
+                               class="form-control">
                     </div>
+
                     <div class="mb-3">
                         <input type="submit" value="장바구니 담기" class="btn btn-primary">
                     </div>
                 </form>
             </div>
-            <div class="card t-mt-[30px]">
-                <div class="card-header">
-                    옵션
-                </div>
+        </div>
 
-                <div class="card-body">
-                    <table class="table table-hover">
-                        <colgroup>
-                            <col class="sm:t-w-40">
-                            <col class="sm:t-w-40">
-                            <col>
-                        </colgroup>
-                        <thead>
-                        <tr>
-                            <th>사이즈</th>
-                            <th>색상</th>
-                            <th>품절</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for product_real in product_reals %}
-                        <tr>
-                            <td>
-                                {{product_real.option_1_display_name}}
-                            </td>
-                            <td>
-                                {{product_real.option_2_display_name}}
-                            </td>
-                            <td>
-                                {% if not product_real.is_sold_out %}
-                                <span class="badge bg-primary">판매중</span>
-                                {% else %}
-                                <span class="badge bg-secondary">품절</span>
-                                {% endif %}
-                            </td>
-                        </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
+        <div class="card t-mt-[30px]">
+            <div class="card-header">
+                옵션
             </div>
-            <div class="card t-mt-[30px]">
-                <div class="card-header">
-                    질문등록
+            <div class="card-body">
+                <table class="table table-hover">
+                    <colgroup>
+                        <col class="sm:t-w-40">
+                        <col class="sm:t-w-40">
+                        <col>
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th>사이즈</th>
+                        <th>색상</th>
+                        <th>품절</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for product_real in product_reals %}
+                    <tr>
+                        <td>
+                            {{product_real.option_1_display_name}}
+                        </td>
+                        <td>
+                            {{product_real.option_2_display_name}}
+                        </td>
+                        <td>
+                            {% if not product_real.is_sold_out %}
+                            <span class="badge bg-primary">판매중</span>
+                            {% else %}
+                            <span class="badge bg-secondary">품절</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card t-mt-[30px]">
+            <div class="card-header">
+                질문등록
+            </div>
+            <div class="card-body">
+                {% if user.is_authenticated %}
+                <form method="POST" action="{% url 'products:question_create' product.id %}">
+                    {% csrf_token %}
+                    {% bootstrap_form question_form %}
+                    {% bootstrap_button button_type="submit" content="질문작성" %}
+                    {% bootstrap_button button_type="reset" content="취소" %}
+                </form>
+                {% else %}
+                <div class="t-text-gray-400">
+                    <a href="{% url 'accounts:signin' %}?next={{request.get_full_path}}">로그인</a> 후 이용해주세요.
                 </div>
-
-                <div class="card-body">
-                    {% if user.is_authenticated %}
-                    <form method="POST" action="{% url 'products:question_create' product.id %}">
-                        {% csrf_token %}
-                        {% bootstrap_form question_form %}
-                        {% bootstrap_button button_type="submit" content="질문작성" %}
-                        {% bootstrap_button button_type="reset" content="취소" %}
-                    </form>
-
-                    {% else %}
-                    <div class="t-text-gray-400">
-                        <a href="{% url 'accounts:signin' %}?next_url={{request.get_full_path}}">로그인</a> 후 이용해 주세요.
-                    </div>
-                    {% endif %}
-
-                    {% if question_form.errors %}
-                    <script>
+                {% endif %}
+                {% if question_form.errors %}
+                <script>
                     let $lastForm = $('form').last();
                     $(window).on('load', function() {
                         $(window).scrollTop($lastForm.offset().top);
                     });
 
-                    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </script>
+                {% endif %}
+
+            </div>
+        </div>
+        <div class="card t-mt-[30px]">
+            <div class="card-header">
+                질문리스트
+            </div>
+            {% if questions %}
+            <ul class="list-group list-group-flush">
+                {% for question in questions %}
+                <li class="list-group-item">
+                    <span class="badge bg-secondary">{{question.id}}</span>
+                    {{question.body}}
+                    {% if question.user == request.user %}
+                    <a href="{% url 'products:question_delete' product.id question.id %}" class="btn btn-sm btn-warning"
+                       onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;">삭제</a>
                     {% endif %}
-
-                    <div class="card t-mt-[30px]">
-                        <div class="card-header">
-                            질문리스트
-                        </div>
-
-                        {% if questions %}
-                        <ul class="list-group list-group-flush">
-                            {% for question in questions %}
-                            <li class="list-group-item">
-                                <span class="badge bg-secondary">{{question.id}}</span>
-                                {{question.body}}
-                                {% if question.user == request.user %}
-                                <a href="{% url 'products:question_delete' product.id question.id %}"
-                                   class="btn btn-sm btn-warning"
-                                   onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;">삭제</a>
-                                <a href="{% url 'products:question_modify' product.id question.id %}"
-                                   class="btn btn-sm btn-secondary">수정</a>
-                                {% endif %}
-                            </li>
-                            {% endfor %}
-                        </ul>
-                        {% endif %}
-
-                        {% if not questions %}
-                        <div class="card-body">
-                            <div class="t-text-gray-400">
-                                질문이 없습니다.
-                            </div>
-                        </div>
-                        {% endif %}
-                    </div>
+                    <a href="{% url 'products:question_modify' product.id question.id %}"
+                       class="btn btn-sm btn-secondary">수정</a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% if not questions %}
+            <div class="card-body">
+                <div class="t-text-gray-400">
+                    질문이 없습니다.
                 </div>
             </div>
+            {% endif %}
         </div>
     </div>
 </section>
-{% endblock %}
+{%endblock%}
